@@ -2,6 +2,7 @@ import React from 'react';
 import HeaderComponent from './Header';
 import IconIssueComponent from './IconIssue';
 import DateIssueComponent from './DateIssue';
+import getIssues from '../lib/api/getIssues';
 import { faEye } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as appHelpers from '../utils/appHelpers';
@@ -32,7 +33,8 @@ class Issues extends React.Component {
             showBody: {},
         };
 
-        this.getIssues = this.getIssues.bind(this);    }
+        this.getIssues = getIssues.bind(this);    
+    }
 
     // set state with props here
     componentWillMount() {
@@ -43,44 +45,24 @@ class Issues extends React.Component {
         });
     }
     componentDidMount() {
-        this.getIssues();
-    }
-    getIssues() {
-        // Github API
-        const headers = {
-            headers: {
-                Authorization: "token 60e07ff280c786e523a632be9af8f992270a5c5b",
-                Accept: "application/vnd.github.v3+json,application/vnd.github.machine-man-preview+json",
-            }
-        };
-
-        const baseUrl = "https://api.github.com/repos"
-
-        const params = appHelpers.encodeQueryString({ state: this.state.listFilter.state, per_page: 40, sort: "created" })
-        let repoOfUser = `${this.state.user}/${this.state.repo}/issues`
-        let fullUrl = `${baseUrl}/${repoOfUser}${params}${this.state.page}`
-
-        fetch(fullUrl, headers)
-            .then(response => {
-                if (response.ok) return response.json();
-                throw new Error('Request failed.');
-            })
-            .then(data => {
-                // set our state with the response
-                this.setState({
-                    issues: data,
-                    loading: false,
-                    error: null,
-                    showBody: {},
-                });
-            })
-            .catch(error => {
-                this.setState({
-                    loading: false,
-                    error: error
-                });
+        getIssues(this.state)
+        .then(data => {
+            // set our state with the response
+            this.setState({
+                issues: data,
+                loading: false,
+                error: null,
+                showBody: {},
             });
+        })
+        .catch(error => {
+            this.setState({
+                loading: false,
+                error: error
+            });
+        });;
     }
+    
     renderLoading() {
         return <progress className="progress is-large is-dark" max="100"></progress>;
     }
@@ -143,7 +125,7 @@ class Issues extends React.Component {
                                             <DateIssueComponent data={data} />
                                         </span>
                                     </span>
-                                    <span className="column show-body has-text-right is-pulled-right purple-icon">
+                                    <span className="column show-body has-text-right is-pulled-right green-icon">
                                         <FontAwesomeIcon icon={faEye} />
                                     </span>
                                 </span>

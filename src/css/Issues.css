@@ -1,10 +1,10 @@
 html{
-    background: bisque;
+    background: #0e3546;
     font-family: 'Montserrat';
   }
 
-.purple-icon{
-    color: purple;
+.green-icon{
+    color: #0e3546;
 }
 
 .navbar-center {
@@ -34,18 +34,18 @@ html{
 }
 
 .panel-heading {
-    background: #7952b3;
+    background: #38293e;
     border: 0!important;
     border-radius: 0;
     border-top: 0!important;
 }
 
 .gold-color{
-    color: goldenrod;
+    color: #e4ad37;
 }
 
 .panel-issue{
-    background: cornsilk;
+    background: #91709b;
 }
 
 .img-item{
@@ -61,7 +61,7 @@ html{
 }
 
 a.panel-block:hover, label.panel-block:hover {
-    background-color: cornsilk;
+    background-color: #91709b;
 }
 
 .panel-icon {
@@ -92,17 +92,17 @@ a.panel-block:hover, label.panel-block:hover {
 .time {
     font-size: 0.78rem;
     width: 100%;
-    color: #586069 !important;
+    color: white !important;
 }
 
 .bodyContainer {
     max-height: fit-content;
-    display: block;
-    background-color: #ffffff;
     margin-top: 10px;
-    overflow-wrap: normal;
-    overflow: hidden;
-    padding: 10px !important;
+    background: rgb(238, 238, 238);
+    padding: 10px;
+    -moz-box-shadow: 0 0 25px #333333;
+    -webkit-box-shadow:0 0 25px #333333;
+    box-shadow: 0 0 25px #333333;
 }
 
 .bodyContainer>li,
@@ -124,9 +124,9 @@ ul {
 .panel-block,
 .panel-heading,
 .panel-tabs {
-    border-bottom: 1px solid #dbdbdb;
-    border-left: 1px solid #dbdbdb;
-    border-right: 1px solid #dbdbdb;
+    border-bottom: 1px solid #e4ad37;
+    border-left: 1px solid #e4ad37;
+    border-right: 1px solid #e4ad37;
 }
 
 .panel-block {
@@ -152,7 +152,7 @@ ul {
     overflow-x: hidden;
     max-width: 90%;
     overflow-wrap: normal;
-    color: #363636 !important;
+    color: white !important;
     margin-right: 12px;
     font-weight: 900;
 }
