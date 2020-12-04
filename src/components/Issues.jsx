@@ -3,6 +3,8 @@ import HeaderComponent from './Header';
 import IconIssueComponent from './IconIssue';
 import DateIssueComponent from './DateIssue';
 import getIssues from '../lib/api/getIssues';
+import renderLoading from '../lib/renderLoading';
+import renderError from '../lib/renderError';
 import { faEye } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as appHelpers from '../utils/appHelpers';
@@ -62,22 +64,12 @@ class Issues extends React.Component {
             });
         });;
     }
-    
-    renderLoading() {
-        return <progress className="progress is-large is-dark" max="100"></progress>;
-    }
-    renderError() {
-        return (
-            <div>
-                Oh no!  {this.state.error.message}
-            </div>
-        );
-    }
+
 
 
     renderIssues() {
         if (this.state.error) {
-            return this.renderError();
+            return renderError(this.state);
         }
 
         // set state to show or hide issue/pr body for a particular panel-block
@@ -146,7 +138,7 @@ class Issues extends React.Component {
                 <nav className="panel">
                     <HeaderComponent listFilter={this.state.listFilter} user={this.state.user} repo={this.state.repo}/>
                     {this.state.loading ?
-                        this.renderLoading()
+                        renderLoading()
                         : this.renderIssues()}
                 </nav></div>);
     }
