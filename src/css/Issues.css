@@ -12,6 +12,34 @@ html{
     justify-content: center;
 }
 
+.card-bordered{
+    border-top: 1px solid goldenrod;
+}
+
+.paginatior-nav{
+    flex-grow: 1;
+    justify-content: center;
+    background: #0e3546;
+}
+
+.pagination-link.is-current{
+    background-color: #91709b;
+    border-color: #91709b;
+    color: #fff;
+}
+
+.pagination-previous, .pagination-next, .pagination-link {
+    border-color: #38293e;
+    color: #fff;
+    background-color: #38293e;
+    cursor: pointer;
+}
+
+.pagination-previous:hover, .pagination-next:hover, .pagination-link:hover {
+    border-color: #38293e;
+    color: #fff;
+}
+
 .navbar-left {
     flex-grow: 1;
     justify-content: left;

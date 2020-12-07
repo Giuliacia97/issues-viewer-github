@@ -34,23 +34,28 @@ const getTimeAgoString = (timestamp) => {
     return getElapsedString(YEAR, 'year');
 }
 
-// renders the '#999 7 days ago by user -- Assigned to user1 user2' string for each issue
-const DateIssueComponent = ({ data }) => {
+function assignmentFormat (data){
+        return `---  Assigned to: ${data.assignees.map(x => { return " " + x.login })}`
+} 
+
+function whichTimeFormat(data){
     const createdAt = getTimeAgoString(new Date(data.created_at))
     const updatedAt = getTimeAgoString(new Date(data.updated_at))
     const user = data.user.login
-    const whichTime = createdAt !== updatedAt
-        ?
-        `#${data.number} created ${createdAt} (updated ${updatedAt})`
-        :
-        `#${data.number} created ${createdAt}`
-    let timeAgoString = `${whichTime} by ${user}`
-    const assigneesString = `${(data.assignees.length > 0 ?
-        ` ---  Assigned to: ${data.assignees.map(x => { return " " + x.login })}`
-        : "")}`
+    if(createdAt !== updatedAt){
+        return `#${data.number} created ${createdAt} by ${user} (updated ${updatedAt})`
+    }
+    return `#${data.number} created ${createdAt} by ${user}`
+}
+
+// renders the '#999 7 days ago by user -- Assigned to user1 user2' string for each issue
+const DateIssueComponent = ({ data }) => {
+    let timeAgoString = whichTimeFormat(data);
+
+    const assigneesString = assignmentFormat(data);
     return (
         <React.Fragment>
-            {timeAgoString + assigneesString}
+            {timeAgoString} {(data.assignees.length>0) && assignmentFormat(data)}
         </React.Fragment>
     )
 }

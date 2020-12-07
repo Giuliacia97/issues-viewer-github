@@ -2,7 +2,11 @@ import React from 'react';
 import HeaderComponent from './Header';
 import IconIssueComponent from './IconIssue';
 import DateIssueComponent from './DateIssue';
+import PaginationComponent from './Pagination';
 import getIssues from '../lib/api/getIssues';
+import renderLoading from '../lib/renderLoading';
+import renderError from '../lib/renderError';
+import incrementPage from '../lib/incrementPage';
 import { faEye } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as appHelpers from '../utils/appHelpers';
@@ -33,6 +37,7 @@ class Issues extends React.Component {
             showBody: {},
         };
 
+        this.handlePageChange = this.handlePageChange.bind(this);
         this.getIssues = getIssues.bind(this);    
     }
 
@@ -60,24 +65,19 @@ class Issues extends React.Component {
                 loading: false,
                 error: error
             });
-        });;
-    }
-    
-    renderLoading() {
-        return <progress className="progress is-large is-dark" max="100"></progress>;
-    }
-    renderError() {
-        return (
-            <div>
-                Oh no!  {this.state.error.message}
-            </div>
-        );
+        });
     }
 
+     // I'm expecting a URL parameter like the end of pagination url - i.e '&page=2'
+     handlePageChange(page) {
+        this.setState(incrementPage(page), () => {
+            this.componentDidMount();
+        })
+    }
 
     renderIssues() {
         if (this.state.error) {
-            return this.renderError();
+            return renderError(this.state);
         }
 
         // set state to show or hide issue/pr body for a particular panel-block
@@ -107,7 +107,7 @@ class Issues extends React.Component {
 
                         return <a href="#" key={index} className={"panel-block panel-issue"}>
                             <span data-id={data.id} className="panel-ovr" onClick={handleClick} >
-                                <span className="columns is-mobile is-multiline is-vcentered is-2 panel-issue">
+                                <span className="columns is-mobile is-multiline is-vcentered is-2 panel-issue card-bordered">
                                     <span className=" column is-1">
                                         <span className="panel-icon icon is-small">
                                             <IconIssueComponent type={!data.pull_request} state={data.state} />
@@ -146,9 +146,17 @@ class Issues extends React.Component {
                 <nav className="panel">
                     <HeaderComponent listFilter={this.state.listFilter} user={this.state.user} repo={this.state.repo}/>
                     {this.state.loading ?
-                        this.renderLoading()
+                        renderLoading()
                         : this.renderIssues()}
-                </nav></div>);
+                        <nav className="navbar  is-fixed-bottom is-transparent">
+                        <div className="navbar-start paginatior-nav">
+                            <div className="navbar-item">
+                                <PaginationComponent pages={this.state.pages} currentPageNumber={this.state.currentPageNumber} onPageChange={this.handlePageChange} />
+                            </div>
+                        </div>
+                    </nav>
+                </nav>
+            </div>);
     }
 }
 

@@ -40,13 +40,12 @@ const PrIconStack = ({ state }) => {
                 transform="shrink-4"
             />
             {
-                state === "red" ?
+                state === "red" &&
                     <FontAwesomeIcon
                         icon={faCheck}
                         color={state}
                         transform="shrink-8 right-4 down-4"
                     />
-                    : ""
             }
         </span>
     )
@@ -55,9 +54,11 @@ const PrIconStack = ({ state }) => {
 // renders the appropriate stacked icon for each issue/pr and applies color accordnig to open/closed state 
 const IconIssueComponent = ({ type, state }) => {
     const iconColor = (state === "closed" ? "red" : "green")
-    let jsx = type ? <IssueIconStack state={iconColor} type={type} />
-        : <PrIconStack state={iconColor} type={type} />
-    return (jsx)
+    return type ? (
+         <IssueIconStack state={iconColor} type={type} />
+    ) : (
+        <PrIconStack state={iconColor} type={type} />
+    )
 }
 
 export default IconIssueComponent;
