@@ -1,7 +1,11 @@
-html{
+html, body{
     background: #0e3546;
     font-family: 'Montserrat';
-  }
+}
+
+.d-table{
+    display: table;
+}
 
 .green-icon{
     color: #0e3546;
@@ -13,6 +17,27 @@ html{
 }
 
 .card-bordered{
+    border-top: 1px solid goldenrod;
+}
+
+.gold-color{
+    color: goldenrod;
+}
+
+.btn-back {
+    border: 1px solid goldenrod;
+    background: goldenrod;
+    color: white;
+    font-weight: 700;
+    border-radius: 0;
+}
+.btn-back:hover {
+    border: 1px solid rgb(160, 122, 24);
+    background: rgb(160, 122, 24);
+    color: white;
+}
+
+.panel-heading:first-child, .panel-tabs:first-child, .panel-block:first-child {
     border-top: 1px solid goldenrod;
 }
 
@@ -40,6 +65,23 @@ html{
     color: #fff;
 }
 
+.issue-decription{
+    border: 2px solid gold;
+    padding: 20px;
+    background: white;
+    color:black;
+}
+
+.card-comment{
+    border-radius: 0;
+    color: black;
+}
+
+.bk-transparent{
+    background-color: transparent;
+    border: 0;
+}
+
 .navbar-left {
     flex-grow: 1;
     justify-content: left;
@@ -48,6 +90,7 @@ html{
 .navbar-right {
     flex-grow: 1;
     justify-content: flex-end;
+    display: inherit;
 }
 
 .img-label-container {
@@ -70,6 +113,7 @@ html{
 
 .gold-color{
     color: #e4ad37;
+    margin-bottom: 0;
 }
 
 .panel-issue{
@@ -133,13 +177,17 @@ a.panel-block:hover, label.panel-block:hover {
     box-shadow: 0 0 25px #333333;
 }
 
+.font-sizeSVG{
+    font-size: 50px;
+    color: goldenrod;
+}
+
 .bodyContainer>li,
 ol,
 pre,
 textarea,
 ul {
     padding: inherit;
-    margin: 10px !important;
 }
 
 .panel-heading {

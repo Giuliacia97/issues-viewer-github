@@ -1,14 +1,9 @@
-import React from 'react';
-import Issues from '../components/Issues.jsx'
+import React from "react";
+import 'bootstrap/dist/css/bootstrap.min.css';
 function App() {
   return (
-    <>
-    <div className="App">  
-     {/*Insert here the user and repo for the homepage*/}
-      <Issues  user="Giuliacia97" repo="example" />
+    <div className="App">
     </div>
-  </>
   );
 }
-
 export default App;
