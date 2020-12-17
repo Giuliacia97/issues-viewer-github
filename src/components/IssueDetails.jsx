@@ -7,10 +7,8 @@ import { faArrowDown } from '@fortawesome/free-solid-svg-icons';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-const IssueDetails = () => {
+const IssueDetails = ({user, repo}) => {
   const { getIssue, comments, issue } = IssuesHook();
-  const user = "Giuliacia97";
-  const repo = "example";
   const { id } = useParams();
 
   useEffect(() => {

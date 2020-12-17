@@ -14,8 +14,12 @@ ReactDOM.render(
 <HeaderComponent user="Giuliacia97" repo="example" />
 <BrowserRouter>
     <Switch>
-      <Route user="Giuliacia97" repo="example" exact path='/' component={Issues} />
-      <Route user="Giuliacia97" repo="example" exact path='/issues/:id' component={IssueDetails}/>
+      <Route exact path='/'>
+        <Issues user="Giuliacia97" repo="example"/>
+      </Route>
+      <Route exact path='/issues/:id'>
+        <IssueDetails user="Giuliacia97" repo="example"/>
+      </Route>
     </Switch>
 </BrowserRouter>
  </div>,

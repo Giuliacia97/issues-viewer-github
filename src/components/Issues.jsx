@@ -15,10 +15,8 @@ import 'bulma/css/bulma.css';
 import '../css/Issues.css';
 
 
-const Issues = () => {
+const Issues = ({user, repo}) => {
     const { issues, getIssues } = IssuesHook();
-    const user = "Giuliacia97";
-    const repo = "example";
 
     useEffect(() => {
       getIssues(user, repo);
