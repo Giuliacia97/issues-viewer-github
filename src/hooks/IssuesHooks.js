@@ -7,6 +7,8 @@ const IssuesHook = () => {
   const [issues, setIssues] = useState([]);
   const [issue, setIssue] = useState(null);
   const [comments, setComments] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState({});
 
   const getIssues = async (user, repo) => {
     const { data } = await request.get(`${user}/${repo}/issues`);
@@ -21,11 +23,20 @@ const IssuesHook = () => {
   };
 
   const getComment = async (number, user, repo) => {
-    const { data } = await request.get(
-      `${user}/${repo}/issues/${number}/comments`
-    );
-    setComments(data);
-  };
+    let ignore = false;
+    try{
+      setLoading(true);
+      setError({});
+      const { data } = await request.get(
+        `${user}/${repo}/issues/${number}/comments`
+      );
+      if (!ignore) setComments(data);
+    } 
+    catch (err){
+      setError(err);
+    }
+    setLoading(false);
+  }
 
   return {
     issues,
@@ -34,7 +45,9 @@ const IssuesHook = () => {
     getIssues,
     getIssue,
     getComment,
-    comments
+    comments,
+    loading,
+    error
   };
 };
 

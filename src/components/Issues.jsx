@@ -1,16 +1,8 @@
 import React, { useEffect } from "react";
 import Issue from "./Issue";
 import IssuesHook from "../hooks/IssuesHooks";
-import HeaderComponent from './Header';
-import IconIssueComponent from './IconIssue';
-import DateIssueComponent from './DateIssue';
 import PaginationComponent from './Pagination';
-import getIssues from '../lib/api/getIssues';
-import renderLoading from '../lib/renderLoading';
-import renderError from '../lib/renderError';
 import incrementPage from '../lib/incrementPage';
-import { faEye } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import 'bulma/css/bulma.css';
 import '../css/Issues.css';
 

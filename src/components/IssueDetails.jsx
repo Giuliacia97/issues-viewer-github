@@ -3,17 +3,30 @@ import { useParams } from "react-router-dom";
 import IssuesHook from "../hooks/IssuesHooks";
 import { moment_relative_time } from "../services/dates";
 import '../css/Issues.css';
-import { faArrowDown } from '@fortawesome/free-solid-svg-icons';
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { faArrowDown, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { PacmanLoader} from 'react-spinners';
 
 const IssueDetails = ({user, repo}) => {
-  const { getIssue, comments, issue } = IssuesHook();
+  const { getIssue, comments, issue, loading} = IssuesHook();
   const { id } = useParams();
 
   useEffect(() => {
     getIssue(id, user, repo);
   }, []);
+
+  if(loading){
+    debugger
+    return (
+      <div className='container d-table'>
+        <PacmanLoader
+          color={'goldenrod'}
+          size={'50px'} 
+          loading={loading} 
+        />
+      </div>
+    )
+  }
 
   return (
     issue !== null && (
