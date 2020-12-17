@@ -14,18 +14,18 @@ const Issue = ({ ...props }) => {
   };
   return (
     <div className="panel-block panel-issue" onClick={() => goToDetails(number)}>
-    <li className="list-group-item align-items-center bk-transparent">
-      <div className="d-flex w-100 justify-content-between">
-        <h5 className="_title">{title}</h5>
-        {comments > 0 && <small>Comments {comments}</small>}
-      </div>
-      <p className="time">
+      <li className="list-group-item align-items-center bk-transparent">
+        <div className="d-flex w-100 justify-content-between">
+          <h5 className="_title">{title}</h5>
+          {comments > 0 && <small>Comments {comments}</small>}
+        </div>
+        <p className="time">
         # {number} opened {moment(created_at).fromNow()} by {user.login}
-      </p>
-    </li>
-    <span className="column show-body has-text-right is-pulled-right green-icon">
-      <FontAwesomeIcon icon={faSignOutAlt} />
-    </span>
+        </p>
+      </li>
+      <span className="column show-body has-text-right is-pulled-right green-icon">
+        <FontAwesomeIcon icon={faSignOutAlt} />
+      </span>
     </div>
   );
 };
