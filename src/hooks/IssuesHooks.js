@@ -41,11 +41,11 @@ const IssuesHook = () => {
     setLoading(false);
   }
 
-  const getAvatarUrl = async (user, repo) => {
-    const { data } = await request.get(`${user}/${repo}`);
-    setAvatarUrl(data.owner.avatar_url);
-    console.log(data);
-  };
+const getAvatarUrl = async (user, repo) => {
+  const { data } = await request.get(`${user}/${repo}`);
+  setAvatarUrl(data.owner.avatar_url);
+  console.log(data);
+};
 
   return {
     issues,

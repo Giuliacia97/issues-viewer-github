@@ -11,19 +11,25 @@ import {Form} from 'react-bootstrap';
 
 const AddIssue = ({user, repo}) => {
   const { issues, getIssues, avatarUrl} = IssuesHook();
+  const signup = () => {
+    alert(`User Created!
+           title: ${inputs.title}
+           body: ${inputs.body}
+           user: ${inputs.user}
+           repo: ${inputs.repo}`);
+  }
+  const {inputs, handleInputChange, handleSubmit} = FormHook(signup);
     useEffect(() => {
       getIssues(user, repo);
     }, []);
+    useEffect(() => {
+      console.log(inputs)
+    }, [inputs]);
 
-    const signup = () => {
-      alert(`User Created!
-             title: ${inputs.title}
-             body: ${inputs.body}
-             user: ${inputs.user}
-             repo: ${inputs.repo}`);
-    }
-    const {inputs, handleInputChange, handleSubmit} = FormHook(signup);
 
+    const onSubmit = (event) => {
+      event.preventDefault()
+      handleSubmit(user, repo, inputs.title, inputs.body)}
 
     return (
       <>
@@ -43,18 +49,12 @@ const AddIssue = ({user, repo}) => {
             <img src={avatarUrl} alt={`${user}/${repo}`}/>
           </div>
           <div className="issue-decription col-11">
-            <Form onSubmit={handleSubmit}>
+            <Form onSubmit={onSubmit}>
               <Form.Group controlId="title">
-                <Form.Control type="text" name="title" value={inputs.title || ''} placeholder="Title"  onChange={handleInputChange} required/>
+                <Form.Control type="text" name="title" value={inputs.title || ''} placeholder="Title" onChange={handleInputChange} required/>
               </Form.Group>
               <Form.Group controlId="body">
-              <Form.Control as="textarea" name="body" value={inputs.body || ''} placeholder="Leave a comment" rows={3}  onChange={handleInputChange}/>
-              </Form.Group>
-              <Form.Group className="d-none" controlId="user">
-                <Form.Control type="text" name="user" value={user} placeholder="User" onChange={handleInputChange}/>
-              </Form.Group>
-              <Form.Group className="d-none" controlId="repo">
-                <Form.Control type="text" name="repo" value={repo} placeholder="Repo" onChange={handleInputChange}/>
+              <Form.Control as="textarea" name="body" value={inputs.body || ''} placeholder="Leave a comment" rows={3} onChange={handleInputChange}/>
               </Form.Group>
               <div className="text-right">
                 <button type="submit" className="btn btn-success">Submit new issue

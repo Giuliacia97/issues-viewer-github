@@ -1,17 +1,22 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Issue from "./Issue";
 import PaginationComponent from "./Pagination";
 import incrementPage from '../lib/incrementPage';
 import IssuesHook from "../hooks/IssuesHooks";
+import PageHook from "../hooks/PageHook";
+//import Pagination from "react-js-pagination";
 import 'bulma/css/bulma.css';
 import '../css/Issues.css';
 
 
 const Issues = ({user, repo}) => {
     const { issues, getIssues } = IssuesHook();
+    // const { handlePageChange, activePage } = PageHook();
+
     useEffect(() => {
       getIssues(user, repo);
     }, []);
+
   
     return (
       <>
@@ -25,6 +30,16 @@ const Issues = ({user, repo}) => {
             ))}
           </ul>
         </div>
+        <div>
+        {/* <Pagination
+          activePage={activePage}
+          itemsCountPerPage={10}
+          totalItemsCount={450}
+          pageRangeDisplayed={5}
+          onChange={handlePageChange(this)}
+          onClick={handlePageChange(this)}
+        /> */}
+      </div>
       </>
     );
   };
