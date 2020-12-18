@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './css/index.css';
-import App from './app/App';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import Issues from './components/Issues'
 import IssueDetails from './components/IssueDetails'
 import HeaderComponent from './components/Header'
